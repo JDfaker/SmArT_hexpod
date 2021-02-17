@@ -11,7 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   gazebo_ros
   geometry_msgs
   rospy
-  sensor_megs
+  sensor_msgs
   std_msgs
 )
 
