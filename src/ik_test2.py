@@ -23,7 +23,6 @@ def inverse_kinematic(target):
 
     theta1 = math.atan2(y, x)
     theta2 = None
-    print('theta1='+str(theta1))
     args = [l3, (x-l1*math.cos(theta1))/(math.cos(theta1)*z), -l2-l3]
     tan = np.roots(args)
     theta2_1 = math.atan(tan[0])
@@ -32,10 +31,11 @@ def inverse_kinematic(target):
         theta2 = theta2_1
     else:
         theta2 = theta2_2
-    print(theta2)
-    # theta3 = -np.arccos((x**2 + y**2 + z**2 - l2**2 - l3**2)/2*l2*l3)
+    sin23 = (z-l2*math.sin(theta2))/l3
+    theta3 = math.asin(sin23)-theta2
+    return np.array([theta1, theta2, theta3])
 
 a = np.array([math.radians(45), math.radians(45), math.radians(-30)])
 print(a)
 print(forward_kinematic(a))
-inverse_kinematic(forward_kinematic(a))
+print(inverse_kinematic(forward_kinematic(a)))

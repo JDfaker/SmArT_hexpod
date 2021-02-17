@@ -54,8 +54,20 @@ class Leg():
         y = target[1]
         z = target[2]
 
-        theta1 = math.atan2(y/x)
-        theta2 = math.acos((-l3**2 + l2**2 + x**2 + y**2 + z**2)/(2*l2*math.sqrt(x**2 + y**2 + z**2))) + math.atan2(z/math.sqrt(x**2 + y**2))
-        theta3 = -math.acos((x**2 + y**2 + z**2 - l2**2 - l3**2)/2*l2*l3)
-
+        theta1 = math.atan2(y, x)
+        theta2 = None
+        args = [l3, (x - l1 * math.cos(theta1)) / (math.cos(theta1) * z), -l2 - l3]
+        tan = np.roots(args)
+        theta2_1 = math.atan(tan[0])
+        theta2_2 = math.atan(tan[1])
+        if theta2_1 >= 0:
+            theta2 = theta2_1
+        else:
+            theta2 = theta2_2
+        sin23 = (z - l2 * math.sin(theta2)) / l3
+        theta3 = math.asin(sin23) - theta2
         return np.array([theta1, theta2, theta3])
+
+if __name__ = "__main__":
+    leg = Leg('rm')
+    print(leg.get_joints_state())

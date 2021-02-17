@@ -7,6 +7,7 @@ import sys
 from geometry_msgs.msg import Point
 from std_msgs.msg import Float64
 from control_msgs.msg import JointControllerState
+from Leg import Leg
 
 class LegController:
     def __init__(self, leg):
@@ -28,4 +29,4 @@ class LegController:
         pass
 
 if __name__ == '__main__':
-    pass
+    rm_LC = LegController(leg=Leg('rm'))
